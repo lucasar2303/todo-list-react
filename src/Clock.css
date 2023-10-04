@@ -1,0 +1,24 @@
+.clock-container{
+    color: #fff;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    transition: all ease 0.3s;
+}
+
+.clock-time{
+font-size: 4.0rem;
+
+}
+
+.clock-date{
+font-size: 1.5rem;
+}
+
+.clock-time, .clock-date{
+    font-weight: 400;
+    margin: 0;
+    transition: all ease 0.3s;
+}
