@@ -1,0 +1,36 @@
+.input-task-form{
+    width: 100%;
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+    max-width: 400px;
+}
+
+.input-task-input{
+    width: 80%;
+    background-color: #444;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    padding: 15px;
+}
+
+.input-task-button{
+    width: 20%;
+    background-color: #333;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+    transition: background-color ease 0.3s;
+    transition: font-size ease 0.1s;
+}
+
+.input-task-button:hover{
+    background-color: #fff;
+    color: #222;
+}
+
+.input-task-button:active{
+    font-size: 10px;
+}
