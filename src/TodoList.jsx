@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 import Clock from './Clock'
 import InputTask from './InputTask'
 import ItemList from './ItemList'
@@ -31,12 +32,13 @@ function TodoList(){
     function addItem(form){
         form.preventDefault();
         if(!newItem){
-            return
+            return;
         }
-        setList([...list, {text: newItem, isCompleted:false}])
+        setList([...list, { id: uuidv4(), text: newItem, isCompleted: false }]);
         setNewItem("");
         document.querySelector("#inputEntry").focus();
     }
+    
 
     function clickCheckItem(index){
         const listAux = [...list];
@@ -96,7 +98,7 @@ function TodoList(){
                             {list.map((item, index)=>(
                                 <ItemList 
                                 text={item.text} 
-                                key={index} 
+                                key={item.id} 
                                 index={index} 
                                 completed={item.isCompleted} 
                                 onClickCheckItem={clickCheckItem} 

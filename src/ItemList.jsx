@@ -26,7 +26,7 @@ function ItemList(props){
         const itemContainer = event.target.closest('.item-container');
         itemContainer.style.background = "#FD6363";
         const itemText = itemContainer.querySelector('.item-text');
-        itemText.style.color = "#FFF"
+        itemText.classList.add("text-selected")
         hideButtons("delete", itemContainer);
     }
     
@@ -39,6 +39,8 @@ function ItemList(props){
             props.onEditItem(props.index, inputValue)
         }else if(operation == "delete"){
             props.onDeleteItem(props.index)
+            showButtons()
+            resetCssDelete()
         }
     }
 
@@ -60,8 +62,15 @@ function ItemList(props){
     function handleMouseLeave(event) {
         if(operation=="delete"){
         showButtons()
-        event.target.closest('.item-container').style.background = "#222";
+        resetCssDelete()
         }
+    }
+
+    function resetCssDelete(){
+        const itemContainer = event.target.closest('.item-container');
+        itemContainer.style.background = "#222";
+        const itemText = itemContainer.querySelector('.item-text');
+        itemText.classList.remove("text-selected")
     }
     
 
