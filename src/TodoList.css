@@ -1,3 +1,36 @@
 .todo-list-container{
+    position: absolute;
+    top: 10%;
     width: 100%;
+    transition: all ease 1s;
+}
+
+.tasks-container{
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tasks-count{
+
+}
+
+.tasks-button-delete{
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: none;
+}
+
+.tasks-count, .tasks-button-delete{
+    color: #666;
+    font-size: 16px;
+    transition: all ease 0.3s;
+}
+
+.tasks-button-delete:hover{
+    color: #fff;
 }

@@ -14,3 +14,17 @@ body{
     flex-flow: column wrap;
     align-items: center;
 }
+
+*:focus{
+    outline: none;
+}
+
+.hide {
+    display: none;
+}
+
+.noItems{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

@@ -12,6 +12,7 @@
     border: none;
     border-radius: 5px 0px 0px 5px;
     padding: 15px;
+    color: #fff;
 }
 
 .input-task-button{
@@ -22,8 +23,7 @@
     color: #fff;
     font-size: 25px;
     cursor: pointer;
-    transition: background-color ease 0.3s;
-    transition: font-size ease 0.1s;
+    transition: font-size ease 0.1s, background-color ease 0.3s;
 }
 
 .input-task-button:hover{
