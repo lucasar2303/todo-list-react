@@ -1,11 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Clock from './Clock'
 import InputTask from './InputTask'
 import ItemList from './ItemList'
 import './Todolist.css'
 
 function TodoList(){
-    const [list, setList] = useState([]);
+
+    // List
+
+    const initialList = () => {
+        const savedList = localStorage.getItem('myList');
+        return savedList ? JSON.parse(savedList) : [];
+    };
+
+    const [list, setList] = useState(initialList);
+
+    useEffect(() => {
+        localStorage.setItem('myList', JSON.stringify(list));
+    }, [list]);
+
+    // -----
+
     const [newItem, setNewItem] = useState("");
     const [deleteConfirm, setDeleteConfirm] = useState(false)
 
@@ -22,7 +37,7 @@ function TodoList(){
         setNewItem("");
         document.querySelector("#inputEntry").focus();
     }
-    
+
     function clickCheckItem(index){
         const listAux = [...list];
         listAux[index].isCompleted = !listAux[index].isCompleted;
@@ -42,6 +57,21 @@ function TodoList(){
             setDeleteConfirm(false);
         }
     }
+
+    function deleteItem(index){
+        const newList = list.filter((item, i) => i !== index);
+        setList(newList);
+    }
+
+    function editItem(index, newText) {
+        const updatedList = list.map((item, i) => 
+            i === index ? { ...item, text: newText } : item
+        );
+    
+        setList(updatedList);
+    }
+    
+    
     
     let containerClassName = 'todo-list-container';
     if (list.length < 1) {
@@ -70,6 +100,8 @@ function TodoList(){
                                 index={index} 
                                 completed={item.isCompleted} 
                                 onClickCheckItem={clickCheckItem} 
+                                onDeleteItem={deleteItem}
+                                onEditItem={editItem}
                             />
                             ))}
                         </div>
