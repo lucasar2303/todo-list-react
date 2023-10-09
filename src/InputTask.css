@@ -34,3 +34,12 @@
 .input-task-button:active{
     font-size: 10px;
 }
+
+
+/* Responsive */
+
+@media (max-width: 499px) {
+    .input-task-form{
+        width: 90%;
+    }
+}

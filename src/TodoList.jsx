@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import Clock from './Clock'
 import InputTask from './InputTask'
@@ -72,6 +73,17 @@ function TodoList(){
     
         setList(updatedList);
     }
+
+    function handleDragEnd(result) {
+    if (!result.destination) return;
+
+    const updatedList = Array.from(list);
+    const [reorderedItem] = updatedList.splice(result.source.index, 1);
+    updatedList.splice(result.destination.index, 0, reorderedItem);
+
+    // Agora, atualize o estado do componente com updatedList.
+    setList(updatedList);
+}
     
     
     
@@ -94,23 +106,36 @@ function TodoList(){
                             <span className='tasks-count'>{completedTasksCount}/{list.length} Tasks</span>
                             <button className='tasks-button-delete' id="button-delete-all" onClick={deleteAll}>Delete all</button>
                         </div>
-                        <div className='list-container'>
-                            {list.map((item, index)=>(
-                                <ItemList 
-                                text={item.text} 
-                                key={item.id} 
-                                index={index} 
-                                completed={item.isCompleted} 
-                                onClickCheckItem={clickCheckItem} 
-                                onDeleteItem={deleteItem}
-                                onEditItem={editItem}
-                            />
-                            ))}
-                        </div>
+                        <DragDropContext onDragEnd={handleDragEnd}>
+                            <Droppable droppableId="taskList">
+                                {(provided) => (
+                                    <div className='list-container' {...provided.droppableProps} ref={provided.innerRef}>
+                                        {list.map((item, index) => (
+                                            <Draggable key={item.id} draggableId={item.id} index={index}>
+                                                {(provided) => (
+                                                    <div ref={provided.innerRef} {...provided.draggableProps} >
+                                                        <ItemList 
+                                                            text={item.text} 
+                                                            key={item.id}
+                                                            index={index}
+                                                            completed={item.isCompleted} 
+                                                            onClickCheckItem={clickCheckItem} 
+                                                            onDeleteItem={deleteItem}
+                                                            onEditItem={editItem}
+                                                            dragHandleProps={provided.dragHandleProps}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </Draggable>
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                     </div>
                 )
             }
-    
         </div>
     );
 }
