@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Clock from './Clock'
 import InputTask from './InputTask'
 import ItemList from './ItemList'
-import './Todolist.css'
+import './todolist.css'
 
 function TodoList(){
 
